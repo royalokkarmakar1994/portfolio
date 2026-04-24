@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alok Roy Karmakar — Agentic AI Developer & Data Scientist</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f9fc;
+    --bg2: #ffffff;
+    --bg3: #f0f2f8;
+    --accent: #1a56db;
+    --accent2: #7c3aed;
+    --accent3: #059669;
+    --accent-light: #eff6ff;
+    --accent2-light: #f5f3ff;
+    --accent3-light: #ecfdf5;
+    --text: #0f172a;
+    --text2: #334155;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --card: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.05), 0 10px 40px rgba(0,0,0,0.08);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(248,249,252,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+  .nav-links { display: flex; gap: 1.8rem; align-items: center; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent);
+    color: white !important;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: #1d4ed8 !important; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 2rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 4rem;
+  }
+  .hero-left { flex: 1; max-width: 640px; }
+  .hero-right { flex: 0 0 300px; display: flex; flex-direction: column; gap: 1rem; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent3-light);
+    border: 1px solid rgba(5,150,105,0.2);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent3);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent3);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)} }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1.08;
+    letter-spacing: -2px;
+    margin-bottom: 0.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+    color: var(--text);
+  }
+  .h1-role {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--accent);
+    letter-spacing: 0;
+    margin-bottom: 1.25rem;
+    animation: fadeUp 0.6s 0.15s ease both;
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--text2);
+    max-width: 540px;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+    margin-bottom: 2.5rem;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(26,86,219,0.25); }
+  .btn-ghost {
+    border: 1.5px solid var(--border);
+    color: var(--text2);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    background: white;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+  .hero-contact-row {
+    display: flex; flex-direction: column; gap: 8px;
+    animation: fadeUp 0.6s 0.35s ease both;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; color: var(--muted);
+  }
+  .contact-item a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .contact-item a:hover { text-decoration: underline; }
+
+  /* Hero cards (right side) */
+  .hero-stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    box-shadow: var(--shadow);
+    animation: fadeUp 0.6s ease both;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hsc-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .hsc-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--text);
+  }
+  .hsc-label { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 1200px; margin: 0 auto;
+    height: 1px; background: var(--border);
+  }
+
+  /* SECTIONS */
+  .section-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+  .section-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    font-family: 'DM Mono', monospace;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    letter-spacing: -1px;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    max-width: 560px;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; }
+  .about-p { color: var(--text2); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+  .about-p strong { color: var(--text); font-weight: 600; }
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+  .tag {
+    background: var(--accent-light);
+    border: 1px solid rgba(26,86,219,0.15);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 6px;
+  }
+  .tag.purple {
+    background: var(--accent2-light);
+    border-color: rgba(124,58,237,0.15);
+    color: var(--accent2);
+  }
+  .tag.green {
+    background: var(--accent3-light);
+    border-color: rgba(5,150,105,0.15);
+    color: var(--accent3);
+  }
+  .lang-cards { display: flex; flex-direction: column; gap: 0.75rem; }
+  .lang-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: var(--shadow);
+  }
+  .lang-name { font-weight: 600; font-size: 0.9rem; }
+  .lang-level {
+    font-size: 0.75rem; font-family: 'DM Mono', monospace;
+    background: var(--bg3); padding: 3px 10px; border-radius: 100px; color: var(--muted);
+  }
+
+  /* SKILLS */
+  .skills-section { background: white; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-group {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .skill-group-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .skill-group-icon {
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-pill {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text2);
+    transition: all 0.2s;
+  }
+  .skill-pill:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+  /* EXPERIENCE */
+  .exp-section { background: var(--bg); }
+  .timeline { display: flex; flex-direction: column; gap: 1.5rem; }
+  .timeline-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+  }
+  .timeline-item.blue::before { background: var(--accent); }
+  .timeline-item.purple::before { background: var(--accent2); }
+  .timeline-item.green::before { background: var(--accent3); }
+  .timeline-item:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: #cbd5e1; }
+  .job-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+  .job-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--text); }
+  .job-company { font-weight: 600; font-size: 0.9rem; margin-top: 3px; }
+  .job-company.blue { color: var(--accent); }
+  .job-company.purple { color: var(--accent2); }
+  .job-company.green { color: var(--accent3); }
+  .job-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+  .job-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .job-loc { font-size: 0.75rem; color: var(--muted); }
+  .job-bullets { margin-top: 1rem; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 6px; }
+  .job-bullets li { color: var(--text2); font-size: 0.88rem; line-height: 1.65; }
+  .job-bullets li strong { color: var(--accent3); font-weight: 600; }
+  .job-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.2rem; }
+  .job-tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* PROJECTS */
+  .projects-section { background: white; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .proj-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+  .proj-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: #cbd5e1; }
+  .proj-header { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+  .proj-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .proj-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; }
+  .proj-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.7; }
+  .proj-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 1rem; }
+
+  /* EDUCATION */
+  .edu-section { background: var(--bg); }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem; }
+  .edu-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .edu-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .edu-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-bottom: 0.75rem;
+  }
+  .edu-badge.current { background: var(--accent3-light); color: var(--accent3); border: 1px solid rgba(5,150,105,0.2); }
+  .edu-badge.ongoing { background: var(--accent-light); color: var(--accent); border: 1px solid rgba(26,86,219,0.2); }
+  .edu-badge.done { background: var(--bg3); color: var(--muted); border: 1px solid var(--border); }
+  .edu-degree { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 4px; }
+  .edu-school { font-size: 0.85rem; font-weight: 600; color: var(--accent2); }
+  .edu-year { font-size: 0.78rem; color: var(--muted); margin-top: 6px; font-family: 'DM Mono', monospace; }
+
+  /* CERTIFICATIONS */
+  .cert-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2rem; }
+  .cert-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem; flex-wrap: wrap;
+    box-shadow: var(--shadow);
+    transition: border-color 0.2s;
+  }
+  .cert-item:hover { border-color: var(--accent); }
+  .cert-name { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+  .cert-issuer { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .cert-year { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); background: var(--accent-light); padding: 4px 10px; border-radius: 100px; white-space: nowrap; }
+
+  /* CONTACT */
+  .contact-section { background: white; border-top: 1px solid var(--border); }
+  .contact-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2rem; letter-spacing: -1px; margin-bottom: 0.75rem; }
+  .contact-sub { color: var(--muted); margin-bottom: 2.5rem; font-size: 0.95rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 8px;
+    background: white;
+    border: 1.5px solid var(--border);
+    padding: 12px 20px;
+    border-radius: 10px;
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    box-shadow: var(--shadow);
+    transition: border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+  /* GITHUB NOTICE */
+  .github-notice {
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    font-size: 0.88rem;
+    color: #92400e;
+    line-height: 1.7;
+  }
+  .github-notice strong { color: #78350f; }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .hero { flex-direction: column; gap: 2.5rem; }
+    .hero-right { flex: none; width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  @media (max-width: 600px) {
+    nav { padding: 0.9rem 1.2rem; }
+    .nav-links { gap: 0.8rem; }
+    .nav-links a { font-size: 0.72rem; }
+    .hero { padding: 6rem 1.25rem 3rem; }
+    .section-wrap { padding: 3.5rem 1.25rem; }
+    .hero-right { grid-template-columns: 1fr; }
+    .contact-box { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">ARK.</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact" class="nav-cta">Hire Me</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">🌍 Open to Remote AI Roles Globally</div>
+    <h1>Alok Roy<br>Karmakar</h1>
+    <div class="h1-role">Agentic AI Developer · Data Scientist · ML Engineer</div>
+    <p class="hero-desc">
+      6+ years turning complex data into business impact — at TCS, Tata Steel, and HDFC. Now building <strong>autonomous AI agents</strong>, LLM pipelines, and GenAI systems at <strong>IIT Roorkee i-Hub</strong>. My edge: deep domain expertise in procurement & finance combined with cutting-edge AI engineering.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:royalokkarmakar@outlook.in" class="btn-primary">✉ Get In Touch</a>
+      <a href="https://www.linkedin.com/in/alokroykarmakar1994" target="_blank" class="btn-ghost">💼 LinkedIn</a>
+      <a href="https://www.github.com/royalokkarmakar1994" target="_blank" class="btn-ghost">🐙 GitHub</a>
+    </div>
+    <div class="hero-contact-row">
+      <div class="contact-item">📧 <a href="mailto:royalokkarmakar@outlook.in">royalokkarmakar@outlook.in</a></div>
+      <div class="contact-item">📞 <a href="tel:+917865997629">+91-7865997629</a></div>
+      <div class="contact-item">📍 Cooch Behar, West Bengal, India</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-card" style="animation-delay:0.2s">
+      <div class="hsc-icon" style="background:#eff6ff">📈</div>
+      <div><div class="hsc-num" data-target="25">0</div><div class="hsc-label">% Efficiency Gain</div></div>
+    </div>
+    <div class="hero-stat-card" style="animation-delay:0.3s">
+      <div class="hsc-icon" style="background:#ecfdf5">💰</div>
+      <div><div class="hsc-num" data-target="15">0</div><div class="hsc-label">% Cost Reduction</div></div>
+    </div>
+    <div class="hero-stat-card" style="animation-delay:0.4s">
+      <div class="hsc-icon" style="background:#f5f3ff">🧠</div>
+      <div><div class="hsc-num" data-target="6">0</div><div class="hsc-label">+ Years Experience</div></div>
+    </div>
+    <div class="hero-stat-card" style="animation-delay:0.5s">
+      <div class="hsc-icon" style="background:#fff7ed">🎯</div>
+      <div><div class="hsc-num" data-target="20">0</div><div class="hsc-label">% Ops Improvement</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" style="background:white;border-top:1px solid var(--border)">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-in">About Me</div>
+    <h2 class="section-title fade-in">Domain expertise meets<br>AI engineering</h2>
+    <div class="about-grid">
+      <div class="fade-in">
+        <p class="about-p">My journey is unconventional — and that's the point. I started as a <strong>Data Analyst at TCS</strong>, spent years deep in SAP systems and supply chain optimization, then moved to <strong>Tata Steel</strong> as a Procurement Manager where I led AI-driven cost reduction initiatives and built IoT monitoring systems.</p>
+        <p class="about-p">At <strong>HDFC Life</strong>, I pivoted into financial analytics, building ML-powered forecasting models that improved accuracy by <strong>25%</strong>. Today, I'm channeling all of that domain expertise into <strong>Agentic AI development</strong> at IIT Roorkee i-Hub — building autonomous agents that actually understand the business context they operate in.</p>
+        <p class="about-p">Most AI engineers lack deep business knowledge. I bring both. That's my unfair advantage — and why I build AI systems that are <strong>technically robust and commercially impactful</strong>.</p>
+        <div class="tag-cloud">
+          <span class="tag">Agentic AI</span>
+          <span class="tag">LLM Pipelines</span>
+          <span class="tag">GenAI</span>
+          <span class="tag purple">Prompt Engineering</span>
+          <span class="tag purple">Deep Learning</span>
+          <span class="tag purple">NLP</span>
+          <span class="tag green">Procurement Automation</span>
+          <span class="tag green">Supply Chain AI</span>
+          <span class="tag green">Financial Modeling</span>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:1rem;color:var(--text)">Languages</div>
+        <div class="lang-cards">
+          <div class="lang-card"><span class="lang-name">English</span><span class="lang-level">Professional</span></div>
+          <div class="lang-card"><span class="lang-name">Bengali</span><span class="lang-level">Native</span></div>
+          <div class="lang-card"><span class="lang-name">Hindi</span><span class="lang-level">Proficient</span></div>
+        </div>
+        <div style="margin-top:1.5rem;background:var(--accent-light);border:1px solid rgba(26,86,219,0.15);border-radius:10px;padding:1.25rem;">
+          <div style="font-weight:700;font-size:0.85rem;color:var(--accent);margin-bottom:6px">🎯 Currently seeking</div>
+          <div style="font-size:0.82rem;color:var(--text2);line-height:1.7">AI Engineer · Agentic AI Developer · Data Scientist · ML Engineer — <strong>Remote roles globally</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-in">Tech Stack</div>
+    <h2 class="section-title fade-in">Skills & Technologies</h2>
+    <div class="skills-grid">
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">
+          <div class="skill-group-icon" style="background:#eff6ff;font-size:1rem">🤖</div>
+          Agentic AI & GenAI
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">LLM Pipelines</span><span class="skill-pill">Autonomous Agents</span><span class="skill-pill">Prompt Engineering</span><span class="skill-pill">Agentic Systems</span><span class="skill-pill">Tool Use / Function Calling</span><span class="skill-pill">RAG</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">
+          <div class="skill-group-icon" style="background:#f5f3ff;font-size:1rem">🧠</div>
+          Machine Learning
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">Predictive Modeling</span><span class="skill-pill">Deep Learning</span><span class="skill-pill">NLP</span><span class="skill-pill">Data Pipelines</span><span class="skill-pill">Model Evaluation</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">
+          <div class="skill-group-icon" style="background:#fff7ed;font-size:1rem">📊</div>
+          AI Trading & Finance
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">EMA / VWAP</span><span class="skill-pill">RSI / MACD</span><span class="skill-pill">Greeks</span><span class="skill-pill">Intraday Strategy</span><span class="skill-pill">Options Modeling</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">
+          <div class="skill-group-icon" style="background:#ecfdf5;font-size:1rem">🐍</div>
+          Data Science & Tools
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span><span class="skill-pill">SQL</span><span class="skill-pill">Advanced Excel</span><span class="skill-pill">Data Visualization</span><span class="skill-pill">Business Analytics</span><span class="skill-pill">Dashboards</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-title">
+          <div class="skill-group-icon" style="background:#fdf4ff;font-size:1rem">🏭</div>
+          Enterprise & Domain
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">SAP (Inventory & Procurement)</span><span class="skill-pill">IoT Integration</span><span class="skill-pill">Supply Chain Optimization</span><span class="skill-pill">Vendor Management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="exp-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-in">Work Experience</div>
+    <h2 class="section-title fade-in">Where I've made an impact</h2>
+    <div class="timeline">
+
+      <div class="timeline-item blue fade-in">
+        <div class="job-top">
+          <div>
+            <div class="job-title">Agentic AI & System Design Trainee</div>
+            <div class="job-company blue">IIT Roorkee i-Hub Foundation × Masai School</div>
+          </div>
+          <div class="job-meta">
+            <div class="job-period">Jan 2026 — Jul 2026</div>
+            <div class="job-loc">📍 Delhi, India (Remote-capable)</div>
+          </div>
+        </div>
+        <ul class="job-bullets">
+          <li>Specializing in Agentic AI and System Design — building <strong>autonomous AI agents</strong> with tool use, memory, and multi-step reasoning</li>
+          <li>Designing LLM-based pipelines and real-world agentic applications for procurement, finance, and operations</li>
+          <li>Applying AI/ML to solve complex business problems with measurable ROI</li>
+        </ul>
+        <div class="job-tags">
+          <span class="job-tag" style="background:var(--accent-light);color:var(--accent)">Agentic AI</span>
+          <span class="job-tag" style="background:var(--accent-light);color:var(--accent)">LLM Pipelines</span>
+          <span class="job-tag" style="background:var(--accent-light);color:var(--accent)">System Design</span>
+          <span class="job-tag" style="background:var(--accent-light);color:var(--accent)">GenAI Apps</span>
+        </div>
+      </div>
+
+      <div class="timeline-item purple fade-in">
+        <div class="job-top">
+          <div>
+            <div class="job-title">Financial Data Analyst</div>
+            <div class="job-company purple">HDFC Life</div>
+          </div>
+          <div class="job-meta">
+            <div class="job-period">Aug 2024 — Nov 2025</div>
+            <div class="job-loc">📍 Cooch Behar</div>
+          </div>
+        </div>
+        <ul class="job-bullets">
+          <li>Improved forecasting accuracy by <strong>25%</strong> using advanced Excel and ML techniques on complex financial datasets</li>
+          <li>Built comprehensive dashboards contributing to <strong>15% cost reduction</strong> in operational spending</li>
+          <li>Implemented financial models improving project evaluation efficiency by <strong>30%</strong></li>
+          <li>Applied data-driven insights to optimize portfolio performance and strategic business growth</li>
+        </ul>
+        <div class="job-tags">
+          <span class="job-tag" style="background:var(--accent2-light);color:var(--accent2)">+25% Forecast Accuracy</span>
+          <span class="job-tag" style="background:var(--accent2-light);color:var(--accent2)">-15% Cost</span>
+          <span class="job-tag" style="background:var(--accent2-light);color:var(--accent2)">ML Modeling</span>
+          <span class="job-tag" style="background:var(--accent2-light);color:var(--accent2)">Dashboards</span>
+        </div>
+      </div>
+
+      <div class="timeline-item green fade-in">
+        <div class="job-top">
+          <div>
+            <div class="job-title">Procurement Manager & Analytics Lead</div>
+            <div class="job-company green">Tata Steel India</div>
+          </div>
+          <div class="job-meta">
+            <div class="job-period">May 2021 — Jun 2024</div>
+            <div class="job-loc">📍 Kolkata</div>
+          </div>
+        </div>
+        <ul class="job-bullets">
+          <li>Optimized steel production processes using advanced analytics delivering <strong>25% efficiency improvement</strong></li>
+          <li>Led AI-driven procurement strategies reducing operational costs by <strong>15%</strong> through vendor negotiations</li>
+          <li>Implemented real-time <strong>IoT monitoring systems</strong> reducing equipment downtime by 15%</li>
+          <li>Built SAP-based inventory management system enhancing order accuracy by <strong>25%</strong></li>
+        </ul>
+        <div class="job-tags">
+          <span class="job-tag" style="background:var(--accent3-light);color:var(--accent3)">+25% Efficiency</span>
+          <span class="job-tag" style="background:var(--accent3-light);color:var(--accent3)">IoT Systems</span>
+          <span class="job-tag" style="background:var(--accent3-light);color:var(--accent3)">SAP</span>
+          <span class="job-tag" style="background:var(--accent3-light);color:var(--accent3)">Procurement AI</span>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in" style="border-left-color:var(--border)">
+        <div class="timeline-item" style="all:unset;display:contents"><!-- reuse styling --></div>
+        <div class="job-top">
+          <div>
+            <div class="job-title">Data Analyst</div>
+            <div class="job-company" style="color:var(--muted)">Tata Consultancy Services (TCS)</div>
+          </div>
+          <div class="job-meta">
+            <div class="job-period">Oct 2018 — Apr 2021</div>
+            <div class="job-loc">📍 Kolkata</div>
+          </div>
+        </div>
+        <ul class="job-bullets">
+          <li>Applied advanced analytics to optimize supply chain processes, resulting in <strong>20% increase in operational efficiency</strong></li>
+          <li>Automated data workflows and built reporting dashboards with SAP system integration</li>
+          <li>Supported procurement data analysis driving improved project outcomes and cost visibility</li>
+        </ul>
+        <div class="job-tags">
+          <span class="job-tag" style="background:var(--bg3);color:var(--muted)">+20% Ops Efficiency</span>
+          <span class="job-tag" style="background:var(--bg3);color:var(--muted)">Supply Chain</span>
+          <span class="job-tag" style="background:var(--bg3);color:var(--muted)">SAP</span>
+          <span class="job-tag" style="background:var(--bg3);color:var(--muted)">Automation</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-in">Projects</div>
+    <h2 class="section-title fade-in">AI work in action</h2>
+    <p class="section-sub fade-in">Real systems built to solve real business problems — not just experiments.</p>
+    <div class="projects-grid">
+      <div class="proj-card fade-in">
+        <div class="proj-header">
+          <div class="proj-icon" style="background:#eff6ff">🤖</div>
+          <div class="proj-title">Autonomous AI Agent Systems</div>
+        </div>
+        <p class="proj-desc">Building autonomous AI agents using LLM frameworks for business process automation. Implementing agentic pipelines with tool use, persistent memory, and multi-step reasoning for procurement and finance use cases.</p>
+        <div class="proj-pills">
+          <span class="skill-pill">LangChain</span><span class="skill-pill">OpenAI API</span><span class="skill-pill">Python</span><span class="skill-pill">Tool Use</span>
+        </div>
+      </div>
+      <div class="proj-card fade-in">
+        <div class="proj-header">
+          <div class="proj-icon" style="background:#fff7ed">📈</div>
+          <div class="proj-title">AI Trading & Predictive Systems</div>
+        </div>
+        <p class="proj-desc">Designed system-driven trading strategies using AI indicators (EMA, VWAP, RSI, MACD, Greeks). Built predictive models for intraday and options trading with measurable accuracy improvements.</p>
+        <div class="proj-pills">
+          <span class="skill-pill">Python</span><span class="skill-pill">ML Models</span><span class="skill-pill">MACD/RSI</span><span class="skill-pill">Backtesting</span>
+        </div>
+      </div>
+      <div class="proj-card fade-in">
+        <div class="proj-header">
+          <div class="proj-icon" style="background:#ecfdf5">🏭</div>
+          <div class="proj-title">Procurement Intelligence Automation</div>
+        </div>
+        <p class="proj-desc">Applied ML techniques to automate procurement decisions, vendor scoring, and supply chain forecasting. Integrated IoT data with analytics platforms for real-time operational monitoring at Tata Steel.</p>
+        <div class="proj-pills">
+          <span class="skill-pill">SAP</span><span class="skill-pill">IoT</span><span class="skill-pill">ML</span><span class="skill-pill">Python</span><span class="skill-pill">Analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GitHub notice -->
+    <div class="github-notice fade-in">
+      <strong>📌 GitHub:</strong> Explore my code, repositories, and project work at <a href="https://www.github.com/royalokkarmakar1994" target="_blank" style="color:#92400e;font-weight:700">github.com/royalokkarmakar1994</a>. Reach out directly for architecture diagrams, project demos, or detailed walkthroughs — happy to share on request.
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="edu-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-in">Education</div>
+    <h2 class="section-title fade-in">Academic background</h2>
+    <div class="edu-grid">
+      <div class="edu-card fade-in">
+        <span class="edu-badge current">● Current</span>
+        <div class="edu-degree">Agentic AI & System Design</div>
+        <div class="edu-school">IIT Roorkee i-Hub × Masai School</div>
+        <div class="edu-year">2026 — Present · Professional Certification</div>
+      </div>
+      <div class="edu-card fade-in">
+        <span class="edu-badge ongoing">Ongoing</span>
+        <div class="edu-degree">Master of Computer Applications (MCA)</div>
+        <div class="edu-school">Amity University Online</div>
+        <div class="edu-year">2025 — 2027 · Computer Science</div>
+      </div>
+      <div class="edu-card fade-in">
+        <span class="edu-badge done">Completed</span>
+        <div class="edu-degree">PG in Banking & Finance</div>
+        <div class="edu-school">Manipal University, Bangalore</div>
+        <div class="edu-year">2024 — 2025</div>
+      </div>
+      <div class="edu-card fade-in">
+        <span class="edu-badge done">Completed</span>
+        <div class="edu-degree">Bachelor of Science (B.Sc.)</div>
+        <div class="edu-school">University of North Bengal, Siliguri</div>
+        <div class="edu-year">2012 — 2016 · Biology & General Sciences</div>
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div style="margin-top:3rem">
+      <div class="section-eyebrow fade-in" style="margin-bottom:1rem">Certifications</div>
+      <div class="cert-list">
+        <div class="cert-item fade-in">
+          <div><div class="cert-name">Agentic AI & System Design</div><div class="cert-issuer">IIT Roorkee i-Hub / Masai School</div></div>
+          <span class="cert-year">2026</span>
+        </div>
+        <div class="cert-item fade-in">
+          <div><div class="cert-name">Artificial Intelligence</div><div class="cert-issuer">Corizo</div></div>
+          <span class="cert-year">Dec 2025</span>
+        </div>
+        <div class="cert-item fade-in">
+          <div><div class="cert-name">Google Startup School: Prompt to Prototype</div><div class="cert-issuer">Google</div></div>
+          <span class="cert-year">Dec 2025</span>
+        </div>
+        <div class="cert-item fade-in">
+          <div><div class="cert-name">SEBI Investor Certification Examination</div><div class="cert-issuer">SEBI / NISM</div></div>
+          <span class="cert-year">Oct 2024</span>
+        </div>
+        <div class="cert-item fade-in">
+          <div><div class="cert-name">Banking & Finance</div><div class="cert-issuer">Manipal University</div></div>
+          <span class="cert-year">Jan 2024</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-wrap">
+    <div class="contact-box fade-in">
+      <div class="contact-title">Ready to build something<br>intelligent together?</div>
+      <p class="contact-sub">Open to Remote AI Engineer · Agentic AI Developer · Data Scientist · ML Engineer roles globally.<br>Let's connect and explore how I can bring value to your team.</p>
+      <div class="contact-links">
+        <a href="mailto:royalokkarmakar@outlook.in" class="contact-link">✉ royalokkarmakar@outlook.in</a>
+        <a href="tel:+917865997629" class="contact-link">📞 +91-7865997629</a>
+        <a href="https://www.linkedin.com/in/alokroykarmakar1994" target="_blank" class="contact-link">💼 LinkedIn</a>
+        <a href="https://www.github.com/royalokkarmakar1994" target="_blank" class="contact-link">🐙 GitHub</a>
+      </div>
+      <p style="margin-top:1.5rem;font-size:0.8rem;color:var(--muted)">📍 Cooch Behar, West Bengal, India · Remote-Ready Globally</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Alok Roy Karmakar · Agentic AI Developer & Data Scientist · Built for opportunity</p>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 70);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // Counter animation
+  function animateCount(el, target) {
+    let v = 0, step = target / 60;
+    const t = setInterval(() => {
+      v += step;
+      if (v >= target) { el.textContent = target + '+'; clearInterval(t); }
+      else el.textContent = Math.floor(v);
+    }, 16);
+  }
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.hsc-num[data-target]').forEach(el => {
+          animateCount(el, parseInt(el.dataset.target));
+        });
+        counterObs.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  const heroRight = document.querySelector('.hero-right');
+  if (heroRight) counterObs.observe(heroRight);
+
+  // Nav active
+  const allSections = document.querySelectorAll('section[id]');
+  const navAs = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    allSections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+    navAs.forEach(a => {
+      const active = a.getAttribute('href') === '#' + cur;
+      a.style.color = active ? 'var(--accent)' : '';
+      a.style.fontWeight = active ? '600' : '';
+    });
+  });
+</script>
+</body>
+</html>
