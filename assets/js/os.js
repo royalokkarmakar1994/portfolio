@@ -26,8 +26,22 @@
     terminal: { title: "ark@os: ~",      glyph: "🖥️", render: renderTerminal, w: 600, h: 420 },
   };
 
-  // icons shown on the desktop + start menu (order matters)
+  // icons shown on the desktop + start menu (order matters).
+  // Plugin apps (settings, games, playground, files) append themselves via registerApp().
   const DESKTOP_ORDER = ["about", "experience", "projects", "skills", "education", "resume", "contact", "terminal"];
+
+  // event hooks (sound engine subscribes here)
+  const HOOKS = { open: [], close: [] };
+  function emit(evt, id) { (HOOKS[evt] || []).forEach((fn) => { try { fn(id); } catch (e) {} }); }
+
+  // Public API for plugin app files. Call BEFORE DOMContentLoaded (top-level in a later <script>).
+  function registerApp(id, config) {
+    APPS[id] = config;
+    if (!config.noIcon && !DESKTOP_ORDER.includes(id)) {
+      if (typeof config.order === "number") DESKTOP_ORDER.splice(config.order, 0, id);
+      else DESKTOP_ORDER.push(id);
+    }
+  }
 
   /* ---------- Window manager state ---------- */
   const windows = new Map(); // id -> { node, app, taskbarBtn, prevRect }
@@ -177,6 +191,7 @@
 
     focusWindow(id);
     runAppHooks(id, win);
+    emit("open", id);
   }
 
   function focusWindow(id) {
@@ -219,10 +234,13 @@
   function closeWindow(id) {
     const rec = windows.get(id);
     if (!rec) return;
+    // let an app clean up timers/intervals (games use this)
+    if (rec.cleanup) { try { rec.cleanup(); } catch (e) {} }
     rec.node.classList.add("closing");
     rec.taskbarBtn.remove();
     setTimeout(() => rec.node.remove(), 150);
     windows.delete(id);
+    emit("close", id);
   }
 
   /* ---------- dragging ---------- */
@@ -285,6 +303,12 @@
   function runAppHooks(id, win) {
     if (id === "about" || id === "resume") animateCounters(win);
     if (id === "terminal") initTerminal(win);
+    // plugin apps provide their own onMount(winBodyEl, helpers)
+    const app = APPS[id];
+    if (app && typeof app.onMount === "function") {
+      const setCleanup = (fn) => { const rec = windows.get(id); if (rec) rec.cleanup = fn; };
+      app.onMount($(".win-body", win), { win, openApp, closeWindow, setCleanup });
+    }
   }
   function animateCounters(win) {
     win.querySelectorAll("[data-count]").forEach((node) => {
@@ -536,9 +560,20 @@
     startClock();
     boot();
   }
+  // Defer to DOMContentLoaded so plugin <script> tags (settings/games/etc.)
+  // have a chance to registerApp() first. If the document is already parsed,
+  // defer one tick so sibling scripts still register before boot.
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-  else init();
+  else setTimeout(init, 0);
 
-  // expose for terminal / debugging
-  window.ARKOS = { openApp };
+  // expose API for plugin app files + terminal/debugging
+  window.ARKOS = {
+    openApp,
+    closeWindow,
+    registerApp,
+    on: (evt, fn) => { if (HOOKS[evt]) HOOKS[evt].push(fn); },
+    el, esc, $,
+    get desktop() { return $("#desktop"); },
+    get taskbarTray() { return $(".taskbar-tray"); },
+  };
 })();

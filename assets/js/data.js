@@ -170,3 +170,6 @@ const ARK = {
     { name: "Banking & Finance", issuer: "Manipal University", year: "Jan 2024" },
   ],
 };
+
+// expose for plugin app files loaded in separate <script> tags
+window.ARK = ARK;
